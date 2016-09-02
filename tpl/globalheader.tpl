@@ -86,8 +86,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 			<div>
 				<ul id="nav" class="menubar">
 			{if $LoggedIn}
-				<li class="menubaritem first"><a href="{$Path}{Pages::DASHBOARD}">{translate key="Dashboard"}</a></li>
-				<li class="menubaritem"><a href="{$Path}{Pages::PROFILE}">{translate key="MyAccount"}</a>
+				<li class="menubaritem first"><a href="{$Path}{Pages::PROFILE}">{translate key="MyAccount"}</a>
 					<ul>
 						<li class="menuitem"><a href="{$Path}{Pages::PROFILE}">{translate key="Profile"}</a></li>
 						<li class="menuitem"><a href="{$Path}{Pages::PASSWORD}">{translate key="ChangePassword"}</a></li>
@@ -100,12 +99,15 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 						<li class="menuitem"><a href="{$Path}{Pages::SCHEDULE}">{translate key="Bookings"}</a></li>
 						<li class="menuitem"><a href="{$Path}{Pages::MY_CALENDAR}">{translate key="MyCalendar"}</a></li>
 						<li class="menuitem"><a href="{$Path}{Pages::CALENDAR}">{translate key="ResourceCalendar"}</a></li>
+						<li class="menuitem"><a href="{$Path}admin/manage_reservations.php">{translate key="ManageReservations"}</a></li>
 						<!--<li class="menuitem"><a href="#">{translate key="Current Status"}</a></li>-->
 						<!--<li class="menuitem"><a href="{$Path}{Pages::OPENINGS}">{translate key="FindAnOpening"}</a></li>-->
 					</ul>
 				</li>
+
+	                <li class="menubaritem help"><a href="{$Path}help.php">{translate key=Help}</a>
 			{if $CanViewAdmin}
-				<li class="menubaritem"><a href="#">{translate key=ApplicationManagement}</a>
+				<li class="menubaritem help"><a href="#">{translate key=ApplicationManagement}</a>
 					<ul>
 						<li class="menuitem"><a
 								href="{$Path}admin/manage_reservations.php">{translate key="ManageReservations"}</a>
@@ -133,6 +135,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 						<li class="menuitem"><a href="{$Path}admin/manage_groups.php">{translate key="ManageGroups"}</a></li>
 						<li class="menuitem"><a href="{$Path}admin/manage_quotas.php">{translate key="ManageQuotas"}</a></li>
 						<li class="menuitem"><a href="{$Path}admin/manage_announcements.php">{translate key="ManageAnnouncements"}</a></li>
+						<li class="menuitem"><a href="{$Path}admin/server_settings.php">{translate key="ServerSettings"}</a></li>
 						<li class="menuitem"><a href="#">{translate key="Customization"}</a>
 								<ul>
 									<li class="menuitem"><a
@@ -143,7 +146,6 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 									<li class="menuitem"><a href="{$Path}admin/manage_theme.php">{translate key="LookAndFeel"}</a></li>
 								</ul>
 							</li>
-						<li class="menuitem"><a href="{$Path}admin/server_settings.php">{translate key="ServerSettings"}</a></li>
 					</ul>
 				</li>
 			{/if}
@@ -173,7 +175,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 				</li>
 			{/if}
 			{if $CanViewReports}
-			<li class="menubaritem"><a href="{$Path}reports/{Pages::REPORTS_GENERATE}">{translate key=Reports}</a>
+			<li class="menubaritem help"><a href="{$Path}reports/{Pages::REPORTS_GENERATE}">{translate key=Reports}</a>
 				<ul>
 					<li><a href="{$Path}reports/{Pages::REPORTS_GENERATE}">{translate key=GenerateReport}</a></li>
 					<li><a href="{$Path}reports/{Pages::REPORTS_SAVED}">{translate key=MySavedReports}</a></li>
@@ -182,7 +184,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 			</li>
 			{/if}
 			{/if}
-				<li class="menubaritem help"><a href="{$Path}help.php">{translate key=Help}</a>
+<!--				<li class="menubaritem help"><a href="{$Path}help.php">{translate key=Help}</a>
 					<ul>
 						<li><a href="{$Path}help.php">{translate key=Help}</a></li>
 						{if $CanViewAdmin}<li><a href="{$Path}help.php?ht=admin">{translate key=Administration}</a></li>{/if}
@@ -190,6 +192,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 					</ul>
 				</li>
 			</ul>
+-->
 			</div>
 			<!-- end #nav -->
 		</div>

@@ -574,7 +574,7 @@ class en_us extends Language
 		$strings['CreateReservation'] = 'Create Reservation';
 		$strings['EditReservation'] = 'Editing Reservation';
 		$strings['LogIn'] = 'Log In';
-		$strings['ManageReservations'] = 'Reservations';
+		$strings['ManageReservations'] = 'Reservation History';
 		$strings['AwaitingActivation'] = 'Awaiting Activation';
 		$strings['PendingApproval'] = 'Pending Approval';
 		$strings['ManageSchedules'] = 'Schedules';
@@ -597,14 +597,14 @@ class en_us extends Language
 		$strings['EditProfile'] = 'Edit My Profile';
 		$strings['FindAnOpening'] = 'Find An Opening';
 		$strings['OpenInvitations'] = 'Open Invitations';
-		$strings['MyCalendar'] = 'My Calendar';
-		$strings['ResourceCalendar'] = 'Resource Calendar';
+		$strings['MyCalendar'] = 'My Reservations';
+		$strings['ResourceCalendar'] = 'All Reservations';
 		$strings['Reservation'] = 'New Reservation';
 		$strings['Install'] = 'Installation';
 		$strings['ChangePassword'] = 'Change Password';
 		$strings['MyAccount'] = 'My Account';
 		$strings['Profile'] = 'Profile';
-		$strings['ApplicationManagement'] = 'Application Management';
+		$strings['ApplicationManagement'] = 'Manage';
 		$strings['ForgotPassword'] = 'Forgot Password';
 		$strings['NotificationPreferences'] = 'Notification Preferences';
 		$strings['ManageAnnouncements'] = 'Announcements';

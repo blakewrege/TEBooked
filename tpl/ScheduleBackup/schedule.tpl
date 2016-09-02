@@ -204,55 +204,47 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 	</div>
 </div>
 
-
-
-
 {block name="reservations"}
-        {assign var=TodaysDate value=Date::Now()}
-        <div id="reservations">
-                <table class="reservations" border="1" cellpadding="0" style="width:auto;">
-                        <tr>
-                                <td>&nbsp;</td>
-                                {foreach from=$BoundDates item=date}
-                                        {assign var=class value=""}
-                                        {if $date->DateEquals($TodaysDate)}
-                                                {assign var=class value="today-custom"}
-                                        {/if}
-                                        <td class="resdate-custom resdate {$class}">{formatdate date=$date key="schedule_daily"}</td>
-                                {/foreach}
-                        </tr>
-
-                        {foreach from=$Resources item=resource name=resource_loop}
-                                {assign var=resourceId value=$resource->Id}
-                                {assign var=href value="{Pages::RESERVATION}?rid={$resource->Id}&sid={$ScheduleId}i}&rd={formatdate date=$date key=url}"}
-                                <tr class="slots">
-                                        <td class="resourcename">
-                                                {if $resource->CanAccess}
-                                                        <a href="{$href}" resourceId="{$resourceId}"
-                                                           class="resourceNameSelector">{$resource->Name}</a>
-                                                {else}
-                                                        {$resource->Name}
-                                                {/if}
-                                        </td>
-                                        {foreach from=$BoundDates item=date}
-                                                {assign var=summary value=$DailyLayout->GetSummary($date, $resourceId)}
-                                                {if $summary->NumberOfReservations() > 0}
-                                                        <td class="reserved clickres slot" date="{formatdate date=$date key=url}" resourceId="{$resourceId}" resid="{$summary->FirstReservation()->ReferenceNumber()}">
-                                                                {$summary->NumberOfReservations()} {if $summary->NumberOfReservations()==1}{translate key=reservation}{else}{translate key=reservations}{/if}
-                                                        </td>
-                                                {else}
-                                                        {assign var=href value="{Pages::RESERVATION}?rid={$resource->Id}&sid={$ScheduleId}&rd={formatdate date=$date key=url}"}
-                                                        <td class="reservable clickres slot" ref="{$href}" data-href="{$href}">&nbsp;</td>
-                                                {/if}
-                                        {/foreach}
-                                </tr>
-                        {/foreach}
-                </table>
-        </div>
+	{assign var=TodaysDate value=Date::Now()}
+	<div id="reservations">
+		{foreach from=$BoundDates item=date}
+			<div style="position:relative;">
+			<table class="reservations" border="1" cellpadding="0" width="100%">
+				{if $TodaysDate->DateEquals($date) eq true}
+				<tr class="today">
+					{else}
+				<tr>
+					{/if}
+					<td class="resdate">{formatdate date=$date key="schedule_daily"}</td>
+					{foreach from=$DailyLayout->GetPeriods($date, true) item=period}
+						<td class="reslabel" colspan="{$period->Span()}">{$period->Label($date)}</td>
+					{/foreach}
+				</tr>
+				{foreach from=$Resources item=resource name=resource_loop}
+					{assign var=resourceId value=$resource->Id}
+					{assign var=slots value=$DailyLayout->GetLayout($date, $resourceId)}
+					{assign var=href value="{Pages::RESERVATION}?rid={$resource->Id}&sid={$ScheduleId}&rd={formatdate date=$date key=url}"}
+					<tr class="slots">
+						<td class="resourcename">
+							{if $resource->CanAccess && $DailyLayout->IsDateReservable($date)}
+								<a href="{$href}" resourceId="{$resource->Id}"
+								   class="resourceNameSelector">{$resource->Name}</a>
+							{else}
+								{$resource->Name}
+							{/if}
+						</td>
+						{foreach from=$slots item=slot}
+							{assign var=slotRef value="{$slot->BeginDate()->Format('YmdHis')}{$resourceId}"}
+							{displaySlot Slot=$slot Href="$href" AccessAllowed=$resource->CanAccess SlotRef=$slotRef}
+						{/foreach}
+					</tr>
+				{/foreach}
+			</table>
+			</div>
+			{flush}
+		{/foreach}
+	</div>
 {/block}
-
-
-
 {else}
 	<div class="error">{translate key=NoResourcePermission}</div>
 {/if}
@@ -263,26 +255,6 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 {$smarty.capture.date_navigation}
 
 {block name="scripts"}
-
-        <script type="text/javascript">
-                $(document).ready(function ()
-                {
-                        var $td = $('td.reserved', $('#reservations'));
-                        $td.unbind('click');
-
-                        $td.click(function (e)
-                        {
-                                e.stopPropagation();
-                                var date = $(this).attr('date').split('-');
-                                var year = date[0];
-                                var month = date[1];
-                                var day = date[2];
-                                var resourceId = $(this).attr('resourceId');
-
-                                window.location = "{Pages::CALENDAR}?{QueryStringKeys::CALENDAR_TYPE}=day&{QueryStringKeys::RESOURCE_ID}=" + resourceId + "&y=" + year + "&m=" + month + "&d=" + day;
-                        });
-                });
-        </script>
 
 {/block}
 

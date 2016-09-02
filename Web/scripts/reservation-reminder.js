@@ -38,8 +38,10 @@ function Reminder(opts)
 
 		var disable = function (div)
 		{
-			div.find('.reminderEnabled').removeAttr('checked');
-			div.find('.reminderTime, .reminderInterval').attr('disabled', 'disabled');
+			//div.find('.reminderEnabled').removeAttr('checked');
+			//div.find('.reminderTime, .reminderInterval').attr('disabled', 'disabled');
+			div.find('.reminderEnabled').attr('checked', 'checked');
+			div.find('.reminderTime, .reminderInterval').removeAttr('disabled', 'disabled');
 		};
 
 		if (opts.reminderTimeStart != '')

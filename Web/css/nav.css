@@ -122,6 +122,22 @@ li.menubaritem ul li a:hover{
 	background: #5a5965;
 }
 
+li.menuitem ul li {
+	float: left;
+	text-align: right;
+	width: 170px;
+	left: -80px !important;
+	right: 0 !important;
+}
+
+li.menuitem ul li a:hover{
+	background: #5a5965;
+	float: left;
+	text-align: right;
+	width: 170px;
+	left: -80px !important;
+	right: 0 !important;
+}
 #signout {
 	float: right;
 	padding-right: 10px;
